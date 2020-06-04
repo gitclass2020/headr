@@ -1,0 +1,67 @@
+<project name= "Testing" basedir="." default=" ">
+
+<property name= "src_dir" value="src/main/java"/>
+<property name= "test_dir" value="test/main/java"/>
+<property name= "dest_dir" value="target/build"/>
+<property name= "classes_dir" value="target/classes"/>
+<property name= "reports" value="target/reports"/>
+
+<path id-="classpath">
+    <pathelement location="E:\apache-ant-1.10.7\lib\junit.jar"/>
+</path>
+
+
+<target name= "clean" description=" deleting all the targets">
+<echo message="deleting all the targets"/>
+
+<delete dir= "${dest_dir}"/>
+<delete dir= "${classes_dir}"/>
+<delete dir= "${reports}"/>
+
+</target>
+
+
+<target name="create" description="creating folders">
+<echo> creating folders </echo>
+
+<mkdir dir ="${dest_dir}"/>
+<mkdir dir ="${classes_dir}"/>
+<mkdir dir ="${reports}"/>
+
+</target>
+
+
+<target name="compile" description="compiling the source code">
+<echo message ="compiling the source code"/>
+
+<javac destdir="${classes_dir}" srcdir="${src_dir}" includeantruntime="false"/>
+
+</target>
+
+<target name="package" description="packaging the files">
+<echo message="packaging the files"/>
+
+<zip destfile="{dest_dir}/${ant.project.name}.zip" srcdir="{classes_dir}"/>
+
+</target>
+
+<target name= "test" description="producing the junit frame work">
+<junit haltonerror="false" haltonfailure="no" printsummary="yes">
+<formatter type="xml" usefile="true">
+<test name="${test_dir}" todir="${reports}" outfile="TEST-HelloWorldTest"/>
+
+</target>
+
+
+<target name="main" depends="clean, create, compile, package, test">
+<echo message="calling all the targets"/>
+
+
+
+</target>
+
+
+
+
+
+</project>
