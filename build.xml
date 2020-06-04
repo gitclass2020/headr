@@ -1,4 +1,4 @@
-<project name= "Testing" basedir="." default=" ">
+<project name= "Testing" basedir="." default="main">
 
 <property name= "src_dir" value="src/main/java"/>
 <property name= "test_dir" value="test/main/java"/>
@@ -6,7 +6,7 @@
 <property name= "classes_dir" value="target/classes"/>
 <property name= "reports" value="target/reports"/>
 
-<path id-="classpath">
+<path id="classpath">
     <pathelement location="E:\apache-ant-1.10.7\lib\junit.jar"/>
 </path>
 
@@ -41,15 +41,15 @@
 <target name="package" description="packaging the files">
 <echo message="packaging the files"/>
 
-<zip destfile="{dest_dir}/${ant.project.name}.zip" srcdir="{classes_dir}"/>
+<zip destfile="${dest_dir}/${ant.project.name}.zip" basedir="${classes_dir}"/>
 
 </target>
 
 <target name= "test" description="producing the junit frame work">
 <junit haltonerror="false" haltonfailure="no" printsummary="yes">
-<formatter type="xml" usefile="true">
-<test name="${test_dir}" todir="${reports}" outfile="TEST-HelloWorldTest"/>
-
+<formatter type="xml" usefile="true"/>
+<test name="${test_dir}" haltonfailure="no" todir="${reports}" outfile="TEST-HelloWorldTest"/>
+</junit>
 </target>
 
 
